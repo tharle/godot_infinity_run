@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://boj5s3rdhy5f7"]
 
-[ext_resource type="Script" uid="uid://5bi6381mgxs5" path="res://Scripts/Player.gd" id="1_5wxv7"]
+[ext_resource type="Script" uid="uid://bp64se2yj1mve" path="res://Scripts/Player.gd" id="1_5wxv7"]
 [ext_resource type="Texture2D" uid="uid://den13t64wlv7x" path="res://Spites/Retro-Lines-16x16/Expanded-Retro-Lines-Enemies-transparent.png" id="1_y6xdh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wxv7"]

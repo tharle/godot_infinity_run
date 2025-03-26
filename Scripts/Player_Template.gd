@@ -3,17 +3,19 @@ extends CharacterBody2D
 ## -----------------------------------------------
 # 		BASE STATS PLAYER
 ## -----------------------------------------------
-const SPEED : float = 100.0 # 1 m/s
-const JUMP_VELOCITY : float = -300.0 #3 m/s
-const JUMP_HALF_VELOCITY : float = JUMP_VELOCITY * 0.5
+const SPEED = 100.0 # 1 m/s
+const JUMP_VELOCITY = -300.0 #3 m/s
+const JUMP_HALF_VELOCITY = JUMP_VELOCITY * 0.5
+const ACCELERATION = 600.0
+const FRICTION = 1000.0
 
 ## Animations
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
-
+	
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	jump()
-	move()
+	move(delta)
 	animation()
 	
 	move_and_slide()
@@ -31,8 +33,20 @@ func jump() ->void :
 		if Input.is_action_just_released("jump") and velocity.y < JUMP_HALF_VELOCITY:
 			velocity.y = JUMP_HALF_VELOCITY
 
-func move() -> void:
-	velocity.x = SPEED
+func move( delta: float) -> void:
+	var input_axis: float = Input.get_axis("left", "right")
+	if input_axis:
+		apply_acceleration(input_axis, delta)
+	else: 
+		apply_friction(delta)
+		
+	animated_sprite.flip_h = input_axis < 0
+
+func apply_acceleration(input_axis: float, delta: float) -> void:
+	velocity.x = move_toward(velocity.x, SPEED * input_axis, ACCELERATION * delta)
+		
+func apply_friction(delta: float) -> void:
+	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	
 func animation() -> void:
 	if is_on_floor():
