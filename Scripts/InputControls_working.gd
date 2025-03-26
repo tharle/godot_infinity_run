@@ -1,7 +1,7 @@
 
 class_name InputControls
 
-extends Node
+extends Node2D
 
 const RIGHT = "right"
 const LEFT = "left"

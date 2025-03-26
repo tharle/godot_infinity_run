@@ -1,87 +1,25 @@
-[gd_scene load_steps=12 format=4 uid="uid://c78wrtcvgqwv6"]
+[gd_scene load_steps=4 format=4 uid="uid://c78wrtcvgqwv6"]
 
+[ext_resource type="Script" uid="uid://dcadelj8cq0cm" path="res://Scripts/World.gd" id="1_005yq"]
 [ext_resource type="TileSet" uid="uid://37kydybur23n" path="res://Spites/TileSets/TLSScenario.tres" id="1_f1tbs"]
-[ext_resource type="Script" uid="uid://6anqmhiwspxj" path="res://Scripts/Player.gd" id="2_005yq"]
-[ext_resource type="Texture2D" uid="uid://den13t64wlv7x" path="res://Spites/Retro-Lines-16x16/Expanded-Retro-Lines-Enemies-transparent.png" id="2_ihjbw"]
-[ext_resource type="Script" uid="uid://dh8q8mmg5jhuu" path="res://Scripts/InputControls.gd" id="4_kxs73"]
+[ext_resource type="PackedScene" uid="uid://boj5s3rdhy5f7" path="res://Prefabs/player.tscn" id="2_ihjbw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_005yq"]
-atlas = ExtResource("2_ihjbw")
-region = Rect2(0, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kxs73"]
-atlas = ExtResource("2_ihjbw")
-region = Rect2(16, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ihjbw"]
-atlas = ExtResource("2_ihjbw")
-region = Rect2(48, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hy3xp"]
-atlas = ExtResource("2_ihjbw")
-region = Rect2(64, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dquwf"]
-atlas = ExtResource("2_ihjbw")
-region = Rect2(80, 32, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_hy3xp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_005yq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kxs73")
-}],
-"loop": true,
-"name": &"Player_Idle",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ihjbw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hy3xp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dquwf")
-}],
-"loop": true,
-"name": &"Player_Jump",
-"speed": 8.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihjbw"]
-size = Vector2(13, 14)
-
-[node name="Game" type="Node2D"]
-
-[node name="InputControlsLoader" type="Node" parent="."]
-script = ExtResource("4_kxs73")
+[node name="World" type="Node2D"]
+script = ExtResource("1_005yq")
 
 [node name="MainCamera" type="Camera2D" parent="."]
-offset = Vector2(0, -80)
+offset = Vector2(0, -64)
 anchor_mode = 0
-zoom = Vector2(3.5, 3.5)
 drag_right_margin = 0.0
 
-[node name="TLMSpring01" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAYAAAABAAAAAAABAAYAAAACAAAAAAACAAYAAAADAAAAAAADAAYAAAABAAAAAAAEAAYAAAACAAAAAAAFAAYAAAADAAAAAAAGAAYAAAABAAAAAAAHAAYAAAACAAAAAAAIAAYAAAADAAAAAAAJAAYAAAABAAAAAAAKAAYAAAACAAAAAAALAAYAAAADAAAAAAAMAAYAAAABAAAAAAANAAYAAAACAAAAAAAOAAYAAAADAAAAAAAPAAYAAAABAAAAAAAQAAYAAAACAAAAAAARAAYAAAADAAAAAAASAAYAAAABAAAAAAATAAYAAAACAAAAAAAUAAYAAAADAAAAAAADAAMAAAAFAAAAAAAGAAIAAAAIAAAAAAAHAAIAAAAJAAAAAAALAAQAAAAFAAAAAAARAAEAAAAFAAAAAAAUAAMAAAAFAAAAAAA=")
+[node name="STBPlataform" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="STBPlataform"]
+polygon = PackedVector2Array(0, 96, 336, 96, 336, 112, 0, 112)
+
+[node name="TLMSpring01" type="TileMapLayer" parent="STBPlataform/CollisionPolygon2D"]
+tile_map_data = PackedByteArray("AAAAAAYAAAABAAAAAAABAAYAAAACAAAAAAACAAYAAAADAAAAAAADAAYAAAABAAAAAAAEAAYAAAACAAAAAAAFAAYAAAADAAAAAAAGAAYAAAABAAAAAAAHAAYAAAACAAAAAAAIAAYAAAADAAAAAAAJAAYAAAABAAAAAAAKAAYAAAACAAAAAAALAAYAAAADAAAAAAAMAAYAAAABAAAAAAANAAYAAAACAAAAAAAOAAYAAAADAAAAAAAPAAYAAAABAAAAAAAQAAYAAAACAAAAAAARAAYAAAADAAAAAAASAAYAAAABAAAAAAATAAYAAAACAAAAAAAUAAYAAAADAAAAAAAGAAIAAAAIAAAAAAAHAAIAAAAJAAAAAAARAAEAAAAFAAAAAAADAP//AAAFAAAAAAANAP7/AAAFAAAAAAAWAP7/AAAFAAAAAAA=")
 tile_set = ExtResource("1_f1tbs")
 
-[node name="CHBPlayer" type="CharacterBody2D" parent="."]
-position = Vector2(22, 75)
-script = ExtResource("2_005yq")
-
-[node name="ANSPlayer" type="AnimatedSprite2D" parent="CHBPlayer"]
-scale = Vector2(-1, 1)
-sprite_frames = SubResource("SpriteFrames_hy3xp")
-animation = &"Player_Idle"
-autoplay = "Player_Idle"
-frame_progress = 0.135177
-
-[node name="COSPlayer" type="CollisionShape2D" parent="CHBPlayer"]
-position = Vector2(-0.5, 1)
-shape = SubResource("RectangleShape2D_ihjbw")
+[node name="Player" parent="." instance=ExtResource("2_ihjbw")]
+position = Vector2(32, 80)
