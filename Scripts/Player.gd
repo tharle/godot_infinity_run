@@ -10,7 +10,6 @@ const JUMP_HALF_VELOCITY : float = JUMP_VELOCITY * 0.5
 var double_jump_available: bool = true # control the double jump
 
 ## Animations
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
