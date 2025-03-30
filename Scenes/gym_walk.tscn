@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://c78wrtcvgqwv6"]
+[gd_scene load_steps=4 format=3 uid="uid://c78wrtcvgqwv6"]
 
-[ext_resource type="Script" uid="uid://dcadelj8cq0cm" path="res://Scripts/World.gd" id="1_005yq"]
-[ext_resource type="TileSet" uid="uid://37kydybur23n" path="res://Spites/TileSets/TLSScenario.tres" id="1_f1tbs"]
 [ext_resource type="PackedScene" uid="uid://boj5s3rdhy5f7" path="res://Prefabs/player.tscn" id="2_ihjbw"]
 [ext_resource type="Script" uid="uid://ibxf01wvgsw3" path="res://Scripts/CameraFollow.gd" id="2_kxs73"]
+[ext_resource type="PackedScene" uid="uid://dvtpkmmprss2t" path="res://Prefabs/Platforms/platform_spring_0.tscn" id="3_005yq"]
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_005yq")
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 offset = Vector2(0, -64)
@@ -15,14 +13,7 @@ drag_right_margin = 0.0
 script = ExtResource("2_kxs73")
 target = NodePath("../Player")
 
-[node name="STBPlataform" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="STBPlataform"]
-polygon = PackedVector2Array(0, 96, 336, 96, 336, 112, 0, 112)
-
-[node name="TLMSpring01" type="TileMapLayer" parent="STBPlataform/CollisionPolygon2D"]
-tile_map_data = PackedByteArray("AAAAAAYAAAABAAAAAAABAAYAAAACAAAAAAACAAYAAAADAAAAAAADAAYAAAABAAAAAAAEAAYAAAACAAAAAAAFAAYAAAADAAAAAAAGAAYAAAABAAAAAAAHAAYAAAACAAAAAAAIAAYAAAADAAAAAAAJAAYAAAABAAAAAAAKAAYAAAACAAAAAAALAAYAAAADAAAAAAAMAAYAAAABAAAAAAANAAYAAAACAAAAAAAOAAYAAAADAAAAAAAPAAYAAAABAAAAAAAQAAYAAAACAAAAAAARAAYAAAADAAAAAAASAAYAAAABAAAAAAATAAYAAAACAAAAAAAUAAYAAAADAAAAAAAGAAIAAAAIAAAAAAAHAAIAAAAJAAAAAAARAAEAAAAFAAAAAAADAP//AAAFAAAAAAANAP7/AAAFAAAAAAAWAP7/AAAFAAAAAAA=")
-tile_set = ExtResource("1_f1tbs")
-
 [node name="Player" parent="." instance=ExtResource("2_ihjbw")]
 position = Vector2(32, 88)
+
+[node name="PlataformSpring0" parent="." instance=ExtResource("3_005yq")]
