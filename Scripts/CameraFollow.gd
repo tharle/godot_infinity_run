@@ -6,4 +6,5 @@ extends Camera2D
 const OFFSET_PLAYER: float = -32.0
 
 func _physics_process(_delta: float) -> void:
-	position.x = target.position.x + offset.x + OFFSET_PLAYER
+	if target != null:
+		position.x = target.position.x + offset.x + OFFSET_PLAYER

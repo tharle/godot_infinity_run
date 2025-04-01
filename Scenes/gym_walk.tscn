@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c78wrtcvgqwv6"]
 
-[ext_resource type="PackedScene" uid="uid://boj5s3rdhy5f7" path="res://Prefabs/player.tscn" id="2_ihjbw"]
 [ext_resource type="Script" uid="uid://ibxf01wvgsw3" path="res://Scripts/CameraFollow.gd" id="2_kxs73"]
-[ext_resource type="PackedScene" uid="uid://dvtpkmmprss2t" path="res://Prefabs/Platforms/platform_spring_0.tscn" id="3_005yq"]
+[ext_resource type="PackedScene" uid="uid://boj5s3rdhy5f7" path="res://Prefabs/player.tscn" id="4_hy3xp"]
+[ext_resource type="PackedScene" uid="uid://dgmsotn3d014m" path="res://Prefabs/Platforms/platform_spawner.tscn" id="4_kxs73"]
 
 [node name="World" type="Node2D"]
 
@@ -13,7 +13,7 @@ drag_right_margin = 0.0
 script = ExtResource("2_kxs73")
 target = NodePath("../Player")
 
-[node name="Player" parent="." instance=ExtResource("2_ihjbw")]
-position = Vector2(32, 88)
+[node name="PlatformSpawner" parent="." instance=ExtResource("4_kxs73")]
 
-[node name="PlataformSpring0" parent="." instance=ExtResource("3_005yq")]
+[node name="Player" parent="." instance=ExtResource("4_hy3xp")]
+position = Vector2(32, 64)
