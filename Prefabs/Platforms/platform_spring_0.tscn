@@ -12,3 +12,6 @@ tile_set = ExtResource("1_pm7cf")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="STBPlataform"]
 polygon = PackedVector2Array(0, 96, 320, 96, 320, 112, 0, 112)
+
+[node name="End" type="Node2D" parent="."]
+position = Vector2(320, 0)

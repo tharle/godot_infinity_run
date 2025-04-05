@@ -5,11 +5,3 @@
 [node name="PlatformSpawner" type="Node2D"]
 script = ExtResource("1_hm8qc")
 _diff_position_in_pixels = Vector2(320, 0)
-
-[node name="Platform0" type="Node2D" parent="."]
-position = Vector2(-320, 0)
-
-[node name="Platform1" type="Node2D" parent="."]
-
-[node name="Platform2" type="Node2D" parent="."]
-position = Vector2(320, 0)

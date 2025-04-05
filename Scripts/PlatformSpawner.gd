@@ -1,10 +1,11 @@
 extends Node2D
 
 var _platform_prefab: PackedScene
-var _spots = [Node2D]
 var _next_position: Vector2
 
 @export var _diff_position_in_pixels: Vector2
+
+#TODO create a stak of platform  with 3 (erease before reuse one)
 
 
 func _ready() -> void:
@@ -17,9 +18,11 @@ func _process(delta: float) -> void:
 
 func spawn_plataform() -> void:
 	var platform_instance: Node2D = _platform_prefab.instantiate()
-	platform_instance.position = _next_position
+	platform_instance.position.x = _next_position.x
 	add_child(platform_instance)
-	calc_next_position()
-
-func calc_next_position() -> void:
-	_next_position += _diff_position_in_pixels
+	
+	var node_end: Node2D = platform_instance.get_node_or_null("End")
+	if node_end == null:
+		print("ERROR, NOT START NOT FIND IN \""+platform_instance.name+"\""  )
+		return
+	_next_position = node_end.global_position
