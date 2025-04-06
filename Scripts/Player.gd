@@ -12,6 +12,9 @@ var double_jump_available: bool = true # control the double jump
 ## Animations
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_end"): PlatformSpawner.instance.spawn_plataform()
+
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)

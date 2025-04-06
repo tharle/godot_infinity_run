@@ -1,4 +1,5 @@
-extends Node2D
+class_name PlatformSpawner
+extends Singleton2D
 
 var _platform_prefab: PackedScene
 var _next_position: Vector2
@@ -13,18 +14,15 @@ func _ready() -> void:
 	_platform_prefab = preload("res://Prefabs/Platforms/platform_spring_0.tscn")
 	_next_position = Vector2()
 	spawn_plataform()
-	
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_home"): spawn_plataform()
 
 func spawn_plataform() -> void:
-	var platform_instance: Node2D = instantiate_platform()
+	var platform_instance: Node2D = _instantiate_platform()
 	
 	add_child(platform_instance)
-	add_and_remove_platform(platform_instance)
-	get_next_position(platform_instance)
+	_add_and_remove_platform(platform_instance)
+	_get_next_position(platform_instance)
 	
-func instantiate_platform() -> Node2D:
+func _instantiate_platform() -> Node2D:
 	#TODO Get Random Platform
 	#TODO Get Platform from correct season
 	
@@ -33,7 +31,7 @@ func instantiate_platform() -> Node2D:
 	
 	return platform_instance
 
-func add_and_remove_platform(platform_instance: Node2D) -> void:
+func _add_and_remove_platform(platform_instance: Node2D) -> void:
 	
 	#remove from platform spawner
 	if _platform_buffer.size() >= max_buffer:
@@ -44,7 +42,7 @@ func add_and_remove_platform(platform_instance: Node2D) -> void:
 	
 	_platform_buffer.push_back(platform_instance)
 	
-func get_next_position(platform_instance: Node2D):
+func _get_next_position(platform_instance: Node2D):
 	var node_end: Node2D = platform_instance.get_node_or_null("End")
 	if node_end == null:
 		print("ERROR, NOT START NOT FIND IN \""+platform_instance.name+"\""  )
