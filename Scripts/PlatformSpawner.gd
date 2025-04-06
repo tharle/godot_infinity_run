@@ -5,7 +5,8 @@ var _next_position: Vector2
 
 @export var _diff_position_in_pixels: Vector2
 
-#TODO create a stak of platform  with 3 (erease before reuse one)
+var _platform_buffer: Array
+@export var max_buffer: int = 3
 
 
 func _ready() -> void:
@@ -17,12 +18,36 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_home"): spawn_plataform()
 
 func spawn_plataform() -> void:
+	var platform_instance: Node2D = instantiate_platform()
+	
+	add_child(platform_instance)
+	add_and_remove_platform(platform_instance)
+	get_next_position(platform_instance)
+	
+func instantiate_platform() -> Node2D:
+	#TODO Get Random Platform
+	#TODO Get Platform from correct season
+	
 	var platform_instance: Node2D = _platform_prefab.instantiate()
 	platform_instance.position.x = _next_position.x
-	add_child(platform_instance)
 	
+	return platform_instance
+
+func add_and_remove_platform(platform_instance: Node2D) -> void:
+	
+	#remove from platform spawner
+	if _platform_buffer.size() >= max_buffer:
+		var platform_oldest: Node2D = _platform_buffer.pop_front()
+		remove_child(platform_oldest)
+		print("Removing old node: "+platform_oldest.name)
+		platform_oldest.free()
+	
+	_platform_buffer.push_back(platform_instance)
+	
+func get_next_position(platform_instance: Node2D):
 	var node_end: Node2D = platform_instance.get_node_or_null("End")
 	if node_end == null:
 		print("ERROR, NOT START NOT FIND IN \""+platform_instance.name+"\""  )
 		return
 	_next_position = node_end.global_position
+	
