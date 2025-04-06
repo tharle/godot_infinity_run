@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=4 uid="uid://dvtpkmmprss2t"]
+[gd_scene load_steps=4 format=4 uid="uid://dvtpkmmprss2t"]
 
 [ext_resource type="TileSet" uid="uid://37kydybur23n" path="res://Spites/TileSets/TLSScenario.tres" id="1_pm7cf"]
+[ext_resource type="Script" uid="uid://uuhtydvkcaoq" path="res://Scripts/PlatformTrigger.gd" id="2_vvsej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvsej"]
+size = Vector2(20, 120)
 
 [node name="PlataformSpring0" type="Node2D"]
 
@@ -15,3 +19,10 @@ polygon = PackedVector2Array(0, 96, 320, 96, 320, 112, 0, 112)
 
 [node name="End" type="Node2D" parent="."]
 position = Vector2(320, 0)
+
+[node name="PlatformTrigger" type="Area2D" parent="End"]
+script = ExtResource("2_vvsej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="End/PlatformTrigger"]
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_vvsej")

@@ -7,13 +7,14 @@ var _next_position: Vector2
 @export var _diff_position_in_pixels: Vector2
 
 var _platform_buffer: Array
-@export var max_buffer: int = 3
+@export var max_buffer: int = 4
 
 
 func _ready() -> void:
 	_platform_prefab = preload("res://Prefabs/Platforms/platform_spring_0.tscn")
 	_next_position = Vector2()
-	spawn_plataform()
+	
+	for i in 3:  spawn_plataform()
 
 func spawn_plataform() -> void:
 	var platform_instance: Node2D = _instantiate_platform()
