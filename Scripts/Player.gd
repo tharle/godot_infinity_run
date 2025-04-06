@@ -21,10 +21,6 @@ var _double_jump_available: bool = true # control the double jump
 func _ready() -> void:
 	_platform_spawner = PlatformSpawner.instance
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_end"): _platform_spawner.spawn_plataform()
-
-
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	jump()
