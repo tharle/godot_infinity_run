@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://c78wrtcvgqwv6"]
+[gd_scene load_steps=7 format=3 uid="uid://c78wrtcvgqwv6"]
 
 [ext_resource type="Script" uid="uid://ibxf01wvgsw3" path="res://Scripts/CameraFollow.gd" id="2_kxs73"]
+[ext_resource type="Script" uid="uid://qxk0ujkvg43" path="res://Scripts/EnemySpawner.gd" id="4_dquwf"]
 [ext_resource type="PackedScene" uid="uid://boj5s3rdhy5f7" path="res://Prefabs/player.tscn" id="4_hy3xp"]
 [ext_resource type="PackedScene" uid="uid://dgmsotn3d014m" path="res://Prefabs/Platforms/platform_spawner.tscn" id="4_kxs73"]
+[ext_resource type="Texture2D" uid="uid://den13t64wlv7x" path="res://Spites/Retro-Lines-16x16/Expanded-Retro-Lines-Enemies-transparent.png" id="4_pa16s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hy3xp"]
+atlas = ExtResource("4_pa16s")
+region = Rect2(193, 278.188, 5.42117, 4.91556)
 
 [node name="World" type="Node2D"]
 
@@ -14,6 +20,14 @@ script = ExtResource("2_kxs73")
 target = NodePath("../Player")
 
 [node name="PlatformSpawner" parent="." instance=ExtResource("4_kxs73")]
+
+[node name="EnemySpawnerGround" type="Node2D" parent="." node_paths=PackedStringArray("to_follow")]
+position = Vector2(296, 64)
+script = ExtResource("4_dquwf")
+to_follow = NodePath("../Player")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySpawnerGround"]
+texture = SubResource("AtlasTexture_hy3xp")
 
 [node name="Player" parent="." instance=ExtResource("4_hy3xp")]
 position = Vector2(32, 64)

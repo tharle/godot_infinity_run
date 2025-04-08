@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://caqngvw1f7q8b"]
+
+[ext_resource type="Texture2D" uid="uid://den13t64wlv7x" path="res://Spites/Retro-Lines-16x16/Expanded-Retro-Lines-Enemies-transparent.png" id="1_8k53p"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n345m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8k53p"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gti1y"]
+atlas = ExtResource("1_8k53p")
+region = Rect2(48, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfbri"]
+atlas = ExtResource("1_8k53p")
+region = Rect2(64, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bftkq"]
+atlas = ExtResource("1_8k53p")
+region = Rect2(80, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fqf7"]
+atlas = ExtResource("1_8k53p")
+region = Rect2(96, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m1gwc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gti1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfbri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bftkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fqf7")
+}],
+"loop": true,
+"name": &"Snake",
+"speed": 8.0
+}]
+
+[node name="Enemy" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_n345m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8k53p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m1gwc")
+animation = &"Snake"
+autoplay = "Snake"
+frame_progress = 0.753358
